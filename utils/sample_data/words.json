@@ -1,0 +1,29 @@
+{
+  "-MiBsBKGWFEU-yluJkL-": {
+    "uid": "1234",
+    "firebaseKey": "-MiBsBKGWFEU-yluJkL-",
+    "word": "loop",
+    "description": "a method for going through each element of a data structure",
+    "language": "javascript",
+    "private": true,
+    "favorite": true
+  },
+  "-MiBsknNSQ6aBG1-2lQS": {
+    "uid": "5678",
+    "firebaseKey": "-MiBsknNSQ6aBG1-2lQS",
+    "word": "variable",
+    "description": "a piece of data assigned and accesible by a name",
+    "language": "python",
+    "private": true,
+    "favorite": false
+  },
+  "-MiBuCve4-r_H-RLUOh2": {
+    "uid": "9101",
+    "firebaseKey": "-MiBuCve4-r_H-RLUOh2",
+    "word": "array",
+    "description": "a data structure holding multiple elements",
+    "language": "javascript",
+    "private": true,
+    "favorite": true
+  }
+}
