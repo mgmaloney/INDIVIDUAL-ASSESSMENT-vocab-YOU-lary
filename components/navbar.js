@@ -1,5 +1,6 @@
 import { render } from 'sass';
 import renderToDom from '../utils/renderToDom';
+import logoutButton from './logoutButton';
 
 const navBar = () => {
   let domString = `

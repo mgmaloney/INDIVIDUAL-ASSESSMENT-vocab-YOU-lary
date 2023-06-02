@@ -1,3 +1,4 @@
+import firebase from 'firebase';
 import client from '../client';
 
 const endpoint = client.responsebaseURL;
@@ -42,3 +43,5 @@ const createUserOnSignIn = async () => {
 };
 
 // const addFavoriteWord = () =>
+
+export { getSingleUser, createUserOnSignIn };
