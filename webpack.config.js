@@ -24,6 +24,11 @@ module.exports = {
     }),
     // new ESLintPlugin()
   ],
+  resolve: {
+    fallback: {
+      fs: false,
+    },
+  },
   module: {
     rules: [
       {

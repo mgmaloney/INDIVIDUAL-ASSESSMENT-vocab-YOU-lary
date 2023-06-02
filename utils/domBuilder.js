@@ -1,3 +1,4 @@
+import { render } from 'sass';
 import renderToDom from './renderToDom';
 
 const domBuilder = () => {
@@ -7,9 +8,12 @@ const domBuilder = () => {
     <div id="language-filters"></div>
     <div id="sort"></div>
     <div id="language-dropdown"</div>
-    <div id="searchbar"><div>
+    <div id="searchbar"></div>
     <div id="words"></div>
     <div id="form-container"></div>
   </div>
   `;
+  renderToDom('app', domString);
 };
+
+export default domBuilder;
