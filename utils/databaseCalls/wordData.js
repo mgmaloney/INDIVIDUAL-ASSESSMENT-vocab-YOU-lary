@@ -34,7 +34,7 @@ const getSingleWord = async (firebaseKey) => {
   }
 };
 
-const getPublicWords = async (user) => {
+const getPublicWords = async () => {
   try {
     const response = await fetch(
       `${endpoint}/words.json?orderBy="private"&equalTo=false`,
