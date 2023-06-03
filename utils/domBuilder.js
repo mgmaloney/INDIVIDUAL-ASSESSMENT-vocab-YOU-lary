@@ -10,6 +10,7 @@ const domBuilder = () => {
     <div id="language-dropdown"</div>
     <div id="searchbar"></div>
     <div id="words"></div>
+    <div id="add-word"></div>
     <div id="form-container"></div>
   </div>
   `;
