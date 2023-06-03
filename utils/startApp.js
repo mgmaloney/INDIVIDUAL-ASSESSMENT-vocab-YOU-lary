@@ -4,8 +4,10 @@ import { createUserOnSignIn } from './databaseCalls/userData';
 import domEvents from '../events/domEvents';
 import addWordModal from '../components/addWordModal';
 import formEvents from '../events/formEvents';
+import { getUserWords } from './databaseCalls/wordData';
+import showWords from '../pages/words';
 
-const startApp = (user) => {
+const startApp = async (user) => {
   createUserOnSignIn();
   domBuilder(); // BUILD THE DOM
   navBar(); //adds the navbar
@@ -14,7 +16,7 @@ const startApp = (user) => {
   formEvents(user); // ADD FORM EVENT LISTENTERS TO THE DOM
   // DYNAMICALLY ADD THE NAV
   // navigationEvents(user); // ATTACH THE EVENT LISTENERS TO THE NAVBAR
-  // // TODO: Put all books on the DOM on App load
+  await getUserWords(user); // // TODO: Put all books on the DOM on App load
 };
 
 export default startApp;
