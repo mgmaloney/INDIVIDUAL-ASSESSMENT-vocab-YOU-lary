@@ -13,7 +13,11 @@ const getUserWords = async (user) => {
         },
       }
     );
-    return await response.json();
+    let words = await response.json();
+    if (words) {
+      return words;
+    }
+    return [];
   } catch (e) {
     console.log(e);
   }
@@ -129,3 +133,14 @@ const publicFilterByLanguage = async (language) => {
 };
 
 const getFavoriteWords = async () => {};
+
+export {
+  getSingleWord,
+  getUserWords,
+  getPublicWords,
+  createWord,
+  updateWord,
+  publicFilterByLanguage,
+  userFilterByLanguage,
+  deleteWord,
+};
