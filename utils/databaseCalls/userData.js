@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 import client from '../client';
 
-const endpoint = client.responsebaseURL;
+const endpoint = client.databaseURL;
 
 const getSingleUser = async (firebaseKey) => {
   try {
@@ -11,7 +11,25 @@ const getSingleUser = async (firebaseKey) => {
         'Content-Type': 'application/json',
       },
     });
-    return response.json();
+    return await response.json();
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const updateUser = async (payload) => {
+  try {
+    const response = await fetch(
+      `${endpoint}/users/${payload.firebaseKey}.json`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      }
+    );
+    return await response.json();
   } catch (e) {
     console.log(e);
   }
@@ -19,6 +37,13 @@ const getSingleUser = async (firebaseKey) => {
 
 const createUserOnSignIn = async () => {
   let userData = firebase.auth().currentUser;
+  let userObj = {
+    uid: `${userData.uid}`,
+    email: `${userData.email}`,
+    photoUrl: `${userData.photoURL}`,
+    displayName: `${userData.displayName}`,
+  };
+  console.log('userobj', userObj);
   if (userData.metadata.creationTime === userData.metadata.lastSignInTime) {
     console.log('user for the first time');
     try {
@@ -27,13 +52,13 @@ const createUserOnSignIn = async () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: {
-          uid: `${userData.uid}`,
-          email: `${userData.email}`,
-          photoUrl: `${userData.photoURL}`,
-        },
+        body: JSON.stringify(userObj),
       });
-      return response.json();
+      const fbKeyObj = await response.json();
+      console.log(fbKeyObj);
+      const fbKey = fbKeyObj.name;
+      console.log(fbKey);
+      updateUser({ firebaseKey: fbKey });
     } catch (e) {
       console.log(e);
     }
