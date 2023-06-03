@@ -1,6 +1,7 @@
+import showWords from '../../pages/words';
 import client from '../client';
 
-const endpoint = client.responsebaseURL;
+const endpoint = client.databaseURL;
 
 const getUserWords = async (user) => {
   try {
@@ -13,15 +14,18 @@ const getUserWords = async (user) => {
         },
       }
     );
-    let words = await response.json();
+    console.log(response);
+    let wordsObj = await response.json();
+    let words = Object.values(wordsObj);
     if (words) {
-      return words;
+      await showWords(words);
+    } else {
+      words = [];
+      await showWords(words);
     }
-    return [];
   } catch (e) {
     console.log(e);
   }
-  return response.json();
 };
 
 const getSingleWord = async (firebaseKey) => {

@@ -34,25 +34,28 @@ const addWordModal = (obj = {}) => {
             ></button>
           </div>
           <div class="modal-body">
-            <form class="word-form" id=${
+            <form data-toggle="validator" class="word-form" id=${
               obj.firebase ? `update-word--${obj.firebase}` : 'submit-word'
             }>
+              <label for="word">Term</label>
               <input
-                class="form-element"
+                class="form-element form-control"
                 type="text"
                 name="word"
                 placeholder="New Word"
                 id="new-word"
                 value="${obj.word || ''}"
-              />
+                required
+              >
               <input
-                class="form-element"
+                class="form-element form-control"
                 type="text"
                 name="description"
                 placeholder="Description"
                 id="new-word-description"
                 value="${obj.description || ''}"
-              />
+                required
+              >
               ${selectVocab()}
               <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="private" ${
@@ -65,7 +68,6 @@ const addWordModal = (obj = {}) => {
                 type="submit"
                 class="btn btn-secondary"
                 value=""
-                data-bs-dismiss="modal"
               >
                 Submit
               </button>
@@ -73,6 +75,7 @@ const addWordModal = (obj = {}) => {
           </div>
           <div class="modal-footer">
             <button
+              id="close-modal-btn"
               type="button"
               class="btn btn-primary"
               data-bs-dismiss="modal"
