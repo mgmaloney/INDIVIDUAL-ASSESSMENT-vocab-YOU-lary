@@ -53,13 +53,12 @@ const showWords = async (array) => {
           <h6 class="card-subtitle mb-2 text-muted card-language">Language: ${
             word.language
           }</h6>
-          <p class="card-text description">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text description">${word.description}</p>
           ${currentVsCommunityCardBtns(word)}
         </div>
       </div>
       `;
     });
-    console.log('domString', `${domString}`);
     renderToDom('words', domString);
   } else {
     emptyWords();

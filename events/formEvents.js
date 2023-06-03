@@ -16,13 +16,11 @@ const formEvents = async (user) => {
     if (e.target.id === 'submit-new-word') {
       if (
         document.getElementById('new-word').value === '' ||
-        document.getElementById('new-word-description').value === ''
+        document.getElementById('new-word-description').value === '' ||
+        document.getElementById('language-dropdown').value === ''
       ) {
         alert('Please fill out each field');
       } else {
-        // let dropdown = document.getElementById('language-dropdown');
-        // let dropdownValue = dropdown.options[dropdown.selectedIndex].value;
-        // console.log(dropdownValue);
         const payload = {
           word: document.getElementById('new-word').value,
           description: document.getElementById('new-word-description').value,
