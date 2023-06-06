@@ -5,6 +5,7 @@ import domEvents from '../events/domEvents';
 import addWordModal from '../components/addWordModal';
 import formEvents from '../events/formEvents';
 import { getUserWords } from './databaseCalls/wordData';
+import navigationEvents from '../events/navigationEvents';
 
 const startApp = async (user) => {
   createUserOnSignIn();

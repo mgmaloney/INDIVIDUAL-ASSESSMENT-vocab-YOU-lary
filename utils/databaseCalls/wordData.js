@@ -63,7 +63,7 @@ const getCommunityWords = async () => {
 
 const deleteWord = async (firebaseKey) => {
   try {
-    const response = fetch(`${endpoint}/word/${firebaseKey}.json`, {
+    const response = fetch(`${endpoint}/words/${firebaseKey}.json`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ const deleteWord = async (firebaseKey) => {
 
 const updateWord = async (payload) => {
   try {
-    const response = fetch(`${endpoint}/books/${payload.firebaseKey}.json`, {
+    const response = fetch(`${endpoint}/words/${payload.firebaseKey}.json`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -97,7 +97,10 @@ const createWord = async (payload) => {
       },
       body: JSON.stringify(payload),
     });
-    return await response.json();
+    let responseJSON = await response.json();
+    console.log(responseJSON);
+    let firebaseKey = responseJSON.name;
+    await updateWord({ firebaseKey });
   } catch (e) {
     console.log(e);
   }
@@ -106,7 +109,7 @@ const createWord = async (payload) => {
 const userFilterByLanguage = async (user, language) => {
   try {
     const response = fetch(
-      `${endpoint}/books.json?orderBy="uid"&equalTo="${user.uid}&orderBy="language"&equalTo="${language}"`,
+      `${endpoint}/words.json?orderBy="uid"&equalTo="${user.uid}&orderBy="language"&equalTo="${language}"`,
       {
         method: 'GET',
         headers: {
@@ -123,7 +126,7 @@ const userFilterByLanguage = async (user, language) => {
 const publicFilterByLanguage = async (language) => {
   try {
     const response = fetch(
-      `${endpoint}/books.json?orderBy="private"&equalTo=false&orderBy="language"&equalTo="${language}"`,
+      `${endpoint}/words.json?orderBy="private"&equalTo=false&orderBy="language"&equalTo="${language}"`,
       {
         method: 'GET',
         headers: {
