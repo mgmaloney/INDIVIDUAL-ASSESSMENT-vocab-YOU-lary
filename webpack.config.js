@@ -23,6 +23,12 @@ module.exports = {
       'process.env': JSON.stringify(process.env || dotenv.parsed),
     }),
     // new ESLintPlugin()
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+      'window.$': 'jquery',
+    }),
   ],
   resolve: {
     fallback: {
