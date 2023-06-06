@@ -1,3 +1,4 @@
+import jQuery from 'jquery';
 import { signOut } from '../utils/auth';
 import clearDom from '../utils/clearDom';
 import {
@@ -10,6 +11,8 @@ import {
   userFilterByLanguage,
   deleteWord,
 } from '../utils/databaseCalls/wordData';
+import { addWordModalUser } from '../components/addWordModal';
+import 'jquery';
 
 const domEvents = (user) => {
   const signOutEventListener = () => {
@@ -35,6 +38,15 @@ const domEvents = (user) => {
         }
         if (e.target.id.includes('edit-user')) {
           const [, firebaseKey] = e.target.id.split('--');
+          addWordModalUser(await getSingleWord(firebaseKey));
+          $('#add-word-modal-user').modal('show');
+          console.log('clcik worked');
+        }
+        if (e.target.id.includes('edit-community')) {
+          const [, firebaseKey] = e.target.id.split('--');
+          addWordModalCommunity(await getSingleWord(firebaseKey));
+          $('#add-word-modal-community').modal('show');
+          console.log('clcik worked');
         }
       });
   };

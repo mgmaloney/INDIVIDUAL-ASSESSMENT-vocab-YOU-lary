@@ -70,13 +70,13 @@ const showCommunityWords = async (array) => {
   const userCardInfo = (word) => {
     if (word.uid === `${firebase.auth().currentUser.uid}`) {
       let cardUserInfo = `
-      <img src="${firebase.auth().currentUser.photoURL}">
+      <img class="profile-pic" src="${firebase.auth().currentUser.photoURL}">
       <h6 class="card-subtitle mb-2 text-muted card-username">Created by You!</h6>
       `;
       return cardUserInfo;
     }
     let cardUserInfo = `
-    <img src="${firebase.auth().currentUser.photoURL}">
+    <img class="profile-pic" src="${firebase.auth().currentUser.photoURL}">
     <h6 class="card-subtitle mb-2 text-muted card-username">Created by You!</h6>
     `;
     return cardUserInfo;

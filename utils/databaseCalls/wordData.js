@@ -82,7 +82,7 @@ const updateWord = async (payload) => {
       },
       body: JSON.stringify(payload),
     });
-    return await response.json();
+    // return await response.json();
   } catch (e) {
     console.log(e);
   }
