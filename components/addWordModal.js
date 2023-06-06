@@ -11,7 +11,7 @@ const addWordModalUser = (obj = {}) => {
     type="button"
     class="btn btn-primary modal-button"
     data-bs-toggle="modal"
-    data-bs-target="#add-word-modal"
+    data-bs-target="#add-word-modal-user"
   >
   Add a Word!
   </button>
@@ -59,7 +59,7 @@ const addWordModalUser = (obj = {}) => {
               >
               ${selectVocab()}
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="private" ${
+                <input type="checkbox"  id="private" ${
                   obj.private ? 'checked' : ''
                 }>
                 <label class="form-check-label" for="private">Private?</label>
@@ -104,7 +104,7 @@ const addWordModalCommunity = (obj = {}) => {
     type="button"
     class="btn btn-primary modal-button"
     data-bs-toggle="modal"
-    data-bs-target="#add-word-modal"
+    data-bs-target="#add-word-modal-community"
   >
   Add a Word!
   </button>
