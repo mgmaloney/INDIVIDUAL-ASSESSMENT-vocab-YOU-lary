@@ -13,7 +13,6 @@ import {
 
 const formEvents = async (user) => {
   document.getElementById('app').addEventListener('click', async (e) => {
-    e.preventDefault();
     if (e.target.id === 'submit-new-word') {
       if (
         document.getElementById('new-word').value === '' ||
@@ -22,6 +21,7 @@ const formEvents = async (user) => {
       ) {
         alert('Please fill out each field');
       } else {
+        e.preventDefault();
         const payload = {
           word: document.getElementById('new-word').value,
           description: document.getElementById('new-word-description').value,
