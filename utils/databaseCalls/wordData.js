@@ -1,4 +1,4 @@
-import showWords from '../../pages/words';
+import { showCommunityWords, showUserWords } from '../../pages/words';
 import client from '../client';
 
 const endpoint = client.databaseURL;
@@ -14,14 +14,13 @@ const getUserWords = async (user) => {
         },
       }
     );
-    console.log(response);
     let wordsObj = await response.json();
     let words = Object.values(wordsObj);
     if (words) {
-      await showWords(words);
+      await showUserWords(words);
     } else {
       words = [];
-      await showWords(words);
+      await showUserWords(words);
     }
   } catch (e) {
     console.log(e);
@@ -42,7 +41,7 @@ const getSingleWord = async (firebaseKey) => {
   }
 };
 
-const getPublicWords = async () => {
+const getCommunityWords = async () => {
   try {
     const response = await fetch(
       `${endpoint}/words.json?orderBy="private"&equalTo=false`,
@@ -53,7 +52,9 @@ const getPublicWords = async () => {
         },
       }
     );
-    return await response.json();
+    const wordsObj = await response.json();
+    let words = Object.values(wordsObj);
+    showCommunityWords(words);
   } catch (e) {
     console.log(e);
   }
@@ -141,7 +142,7 @@ const getFavoriteWords = async () => {};
 export {
   getSingleWord,
   getUserWords,
-  getPublicWords,
+  getCommunityWords,
   createWord,
   updateWord,
   publicFilterByLanguage,

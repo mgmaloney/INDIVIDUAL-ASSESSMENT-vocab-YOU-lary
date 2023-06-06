@@ -5,7 +5,6 @@ import domEvents from '../events/domEvents';
 import addWordModal from '../components/addWordModal';
 import formEvents from '../events/formEvents';
 import { getUserWords } from './databaseCalls/wordData';
-import showWords from '../pages/words';
 
 const startApp = async (user) => {
   createUserOnSignIn();
@@ -15,7 +14,7 @@ const startApp = async (user) => {
   domEvents(user); // starEvent(user); // ADD THE EVENT LISTENTERS TO THE DOM
   formEvents(user); // ADD FORM EVENT LISTENTERS TO THE DOM
   // DYNAMICALLY ADD THE NAV
-  // navigationEvents(user); // ATTACH THE EVENT LISTENERS TO THE NAVBAR
+  navigationEvents(user); // ATTACH THE EVENT LISTENERS TO THE NAVBAR
   await getUserWords(user); // // TODO: Put all books on the DOM on App load
 };
 

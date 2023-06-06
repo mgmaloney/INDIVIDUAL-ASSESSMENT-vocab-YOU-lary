@@ -43,7 +43,6 @@ const createUserOnSignIn = async () => {
     photoUrl: `${userData.photoURL}`,
     displayName: `${userData.displayName}`,
   };
-  console.log('userobj', userObj);
   if (userData.metadata.creationTime === userData.metadata.lastSignInTime) {
     console.log('user for the first time');
     try {
@@ -55,9 +54,7 @@ const createUserOnSignIn = async () => {
         body: JSON.stringify(userObj),
       });
       const fbKeyObj = await response.json();
-      console.log(fbKeyObj);
       const fbKey = fbKeyObj.name;
-      console.log(fbKey);
       updateUser({ firebaseKey: fbKey });
     } catch (e) {
       console.log(e);

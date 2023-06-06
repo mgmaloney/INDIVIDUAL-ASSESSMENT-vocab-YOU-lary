@@ -7,10 +7,9 @@ const navBar = () => {
   <nav class="navbar>
     <div id="main-nav">
       <ul class="nav-list">
-        <li class="nav-item" id="logo"><button class="nav-button">Vocab-YOU-Lary</button></li>
-        <li class="nav-item"><button class="nav-button">Create Entry</button></li>
-        <li class="nav-item"><button class="nav-button">Create Language</button></li>
-        <li class="nav-item"><button class="nav-button">Community</button></li>
+        <li class="nav-item" id="logo"><button id="home-btn" class="nav-button">Vocab-YOU-Lary</button></li>
+        <li class="nav-item"><button id="create-entry-btn" class="nav-button">Create Entry</button></li>
+        <li class="nav-item"><button id="community-btn" class="nav-button">Community</button></li>
       </ul>
     </div>
     <div id="search-logout">
