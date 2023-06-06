@@ -1,4 +1,4 @@
-import showWords from '../pages/words';
+import { showUserWords, showCommunityWords } from '../pages/words';
 import {
   getSingleWord,
   getUserWords,
