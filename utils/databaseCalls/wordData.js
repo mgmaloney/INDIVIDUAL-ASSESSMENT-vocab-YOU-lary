@@ -107,9 +107,10 @@ const createWord = async (payload) => {
 };
 
 const userFilterByLanguage = async (user, language) => {
+  let words = [];
   try {
-    const response = fetch(
-      `${endpoint}/words.json?orderBy="uid"&equalTo="${user.uid}&orderBy="language"&equalTo="${language}"`,
+    const response = await fetch(
+      `${endpoint}/words.json?orderBy="uid"&equalTo="${user.uid}"`,
       {
         method: 'GET',
         headers: {
@@ -117,16 +118,21 @@ const userFilterByLanguage = async (user, language) => {
         },
       }
     );
-    return response.json();
+    let wordsObj = await response.json();
+    words = Object.values(wordsObj);
   } catch (e) {
     console.log(e);
   }
+  const languageWords = words.filter((word) => word.language === `${language}`);
+  console.log(languageWords);
+  showUserWords(languageWords);
 };
 
 const publicFilterByLanguage = async (language) => {
+  let words = [];
   try {
     const response = fetch(
-      `${endpoint}/words.json?orderBy="private"&equalTo=false&orderBy="language"&equalTo="${language}"`,
+      `${endpoint}/words.json?orderBy="private"&equalTo=false`,
       {
         method: 'GET',
         headers: {
@@ -134,10 +140,13 @@ const publicFilterByLanguage = async (language) => {
         },
       }
     );
-    return response.json();
+    let wordsObj = await response.json();
+    words = Object.values(wordsObj);
   } catch (e) {
     console.log(e);
   }
+  const languageWords = words.filter((word) => word.language === `${language}`);
+  console.log(languageWords);
 };
 
 const getFavoriteWords = async () => {
