@@ -140,7 +140,80 @@ const publicFilterByLanguage = async (language) => {
   }
 };
 
-const getFavoriteWords = async () => {};
+const getFavoriteWords = async () => {
+  try {
+    const response = await fetch(
+      `${endpoint}/words.json?orderBy="favorite"&equalTo=true`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const getAllWords = async (user) => {
+  let communityWords = [];
+  let userWords = [];
+  try {
+    const response = await fetch(
+      `${endpoint}/words.json?orderBy="private"&equalTo=false`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    let communityWordsObj = await response.json();
+    let communityWordsArr = Object.values(communityWordsObj);
+    if (communityWordsArr) {
+      communityWords = communityWordsArr;
+    } else {
+      return [];
+    }
+  } catch (e) {
+    console.log(e);
+  }
+  try {
+    const response = await fetch(
+      `${endpoint}/words.json?orderBy="uid"&equalTo="${user.uid}"`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    let userWordsObj = await response.json();
+    let userWordsArr = Object.values(userWordsObj);
+    if (userWordsArr) {
+      userWords = userWordsArr;
+    } else {
+      words = [];
+    }
+  } catch (e) {
+    console.log(e);
+  }
+  const allWords = communityWords.concat(userWords);
+  return allWords;
+};
+
+const getLanguages = async (user) => {
+  let words = await getAllWords(user);
+  let languages = ['javascript', 'css', 'html'];
+  words.forEach((word) => {
+    if (!languages.includes(word.language)) {
+      languages.push(word.language);
+    }
+  });
+  console.log(languages);
+  return languages;
+};
 
 export {
   getSingleWord,
@@ -151,4 +224,5 @@ export {
   publicFilterByLanguage,
   userFilterByLanguage,
   deleteWord,
+  getLanguages,
 };
