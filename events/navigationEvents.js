@@ -1,3 +1,4 @@
+import { filterBtnsCommunity } from '../components/filtersBtns';
 import { getCommunityWords } from '../utils/databaseCalls/wordData';
 
 const navigationEvents = (e) => {
@@ -6,6 +7,7 @@ const navigationEvents = (e) => {
     .addEventListener('click', async (e) => {
       if (e.target.id === 'community-btn') {
         await showCommunityWord(await getCommunityWords());
+        await filterBtnsCommunity();
       }
     });
 };
