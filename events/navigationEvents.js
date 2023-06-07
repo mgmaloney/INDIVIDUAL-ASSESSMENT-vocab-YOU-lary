@@ -5,7 +5,7 @@ const navigationEvents = (e) => {
     .getElementById('main-container')
     .addEventListener('click', async (e) => {
       if (e.target.id === 'community-btn') {
-        getCommunityWords();
+        await showCommunityWord(await getCommunityWords());
       }
     });
 };

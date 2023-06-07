@@ -6,10 +6,12 @@ import formEvents from '../events/formEvents';
 import { getUserWords } from './databaseCalls/wordData';
 import navigationEvents from '../events/navigationEvents';
 import { addWordModalUser } from '../components/addWordModal';
+import filterBtns from '../components/filtersBtns';
 
 const startApp = async (user) => {
   createUserOnSignIn();
-  domBuilder(); // BUILD THE DOM
+  domBuilder();
+  filterBtns(user); // BUILD THE DOM
   navBar(); //adds the navbar
   addWordModalUser();
   domEvents(user); // starEvent(user); // ADD THE EVENT LISTENTERS TO THE DOM
