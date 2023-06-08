@@ -13,7 +13,8 @@ import {
 
 const formEvents = async (user) => {
   document.getElementById('app').addEventListener('click', async (e) => {
-    if (e.target.id === 'submit-new-word') {
+    e.preventDefault();
+    if (e.target.id.includes('submit-new-word')) {
       if (
         document.getElementById('new-word').value === '' ||
         document.getElementById('new-word-description').value === '' ||
@@ -21,7 +22,6 @@ const formEvents = async (user) => {
       ) {
         alert('Please fill out each field');
       } else {
-        e.preventDefault();
         const payload = {
           word: document.getElementById('new-word').value,
           description: document.getElementById('new-word-description').value,
@@ -31,7 +31,11 @@ const formEvents = async (user) => {
           uid: `${user.uid}`,
         };
         await createWord(payload);
-        await getUserWords(user);
+        if (e.target.id === 'submit-new-word') {
+          await getUserWords(user);
+        } else {
+          await getCommunityWords();
+        }
         alert('Word Submitted!');
         document.getElementById('close-modal-btn').click();
       }
@@ -53,12 +57,11 @@ const formEvents = async (user) => {
           language: document.getElementById('language-dropdown').value,
         };
         await updateWord(payload);
-        if (e.target.id.includes('update-word-user')) {
+        if (e.target.id === 'update-word-user') {
           await getUserWords(user);
         } else {
           await getCommunityWords();
         }
-
         alert('Word Submitted!');
         document.getElementById('close-modal-btn').click();
       }
