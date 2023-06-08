@@ -90,7 +90,7 @@ const showCommunityWords = async (array) => {
       `;
       return cardBtns;
     }
-    let cardBtn = `<button id="add-entry-button>Add to my entries</button>`;
+    let cardBtn = `<button id="add-entry-button">Add to my entries</button>`;
     return cardBtn;
   };
 
@@ -98,7 +98,7 @@ const showCommunityWords = async (array) => {
     let domString = '';
     array.forEach((word) => {
       domString += `
-      <div class="card" style="width: 18rem;">
+      <div class="card" style="width: 18rem">
         <div class="card-body">
           <h5 class="card-title card-word">${word.word}</h5>
           <div id="card-user">

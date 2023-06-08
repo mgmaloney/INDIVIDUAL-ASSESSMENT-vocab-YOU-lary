@@ -1,6 +1,4 @@
-import { render } from 'sass';
 import renderToDom from '../utils/renderToDom';
-import logoutButton from './logoutButton';
 import { addWordModalCommunity, addWordModalUser } from './addWordModal';
 
 const navBar = (community) => {
@@ -12,10 +10,6 @@ const navBar = (community) => {
         <li class="nav-item"><button id="community-btn" class="nav-button">Community</button></li>
         ${community ? addWordModalCommunity() : addWordModalUser()}
       </ul>
-    </div>
-    <div id="search-logout">
-      <input id="searchbox" type="text"></input>
-      <button id="google-auth" class="btn btn-danger">SIGNOUT</button>
     </div>
   </nav>
   `;

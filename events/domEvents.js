@@ -17,6 +17,7 @@ import 'jquery';
 const domEvents = (user) => {
   const signOutEventListener = () => {
     document.getElementById('google-auth').addEventListener('click', () => {
+      console.log('click working?');
       signOut();
       clearDom();
     });
