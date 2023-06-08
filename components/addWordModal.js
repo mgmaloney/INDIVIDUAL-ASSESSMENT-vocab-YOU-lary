@@ -68,7 +68,7 @@ const addWordModalUser = (obj = {}) => {
                 id="${
                   obj.firebaseKey
                     ? `update-word-user--${obj.firebaseKey}`
-                    : 'submit-new-word'
+                    : 'submit-new-word-user'
                 }"
                 type="submit"
                 class="btn btn-secondary"
@@ -161,7 +161,7 @@ const addWordModalCommunity = (obj = {}) => {
                 id="${
                   obj.firebaseKey
                     ? `update-word-community--${obj.firebaseKey}`
-                    : 'submit-new-word'
+                    : 'submit-new-word-community'
                 }"
                 type="submit"
                 class="btn btn-secondary"

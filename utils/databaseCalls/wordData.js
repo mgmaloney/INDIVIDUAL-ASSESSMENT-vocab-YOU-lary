@@ -1,4 +1,5 @@
 import { showCommunityWords, showUserWords } from '../../pages/words';
+import firebase from 'firebase';
 import client from '../client';
 
 const endpoint = client.databaseURL;
@@ -54,11 +55,11 @@ const getCommunityWords = async () => {
     );
     const wordsObj = await response.json();
     let words = Object.values(wordsObj);
+    console.log('communitywords', words);
     showCommunityWords(words);
   } catch (e) {
     console.log(e);
   }
-  return response.json();
 };
 
 const deleteWord = async (firebaseKey) => {
@@ -190,7 +191,9 @@ const getAllWords = async (user) => {
   }
   try {
     const response = await fetch(
-      `${endpoint}/words.json?orderBy="uid"&equalTo="${user.uid}"`,
+      `${endpoint}/words.json?orderBy="uid"&equalTo="${
+        firebase.auth().currentUser.uid
+      }"`,
       {
         method: 'GET',
         headers: {

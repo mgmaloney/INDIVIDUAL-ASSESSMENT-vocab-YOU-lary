@@ -4,7 +4,7 @@ import clearDom from '../utils/clearDom';
 import {
   getSingleWord,
   getUserWords,
-  getPublicWords,
+  getCommunityWords,
   createWord,
   updateWord,
   publicFilterByLanguage,
