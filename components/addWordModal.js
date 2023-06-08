@@ -91,7 +91,8 @@ const addWordModalUser = (obj = {}) => {
         </div>
       </div>
   `;
-  renderToDom('add-word', domString);
+  return domString;
+  // renderToDom('add-word', domString);
 };
 
 const addWordModalCommunity = (obj = {}) => {
@@ -184,7 +185,7 @@ const addWordModalCommunity = (obj = {}) => {
         </div>
       </div>
   `;
-  renderToDom('add-word', domString);
+  return domString;
 };
 
 export { addWordModalCommunity, addWordModalUser };

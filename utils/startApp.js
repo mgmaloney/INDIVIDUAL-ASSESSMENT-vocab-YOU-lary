@@ -13,8 +13,7 @@ const startApp = async (user) => {
   createUserOnSignIn();
   domBuilder();
   filterBtnsUser(user); // BUILD THE DOM
-  navBar(); //adds the navbar
-  addWordModalUser();
+  navBar(false); //adds the navbar
   domEvents(user); // starEvent(user); // ADD THE EVENT LISTENTERS TO THE DOM
   formEvents(user); // ADD FORM EVENT LISTENTERS TO THE DOM
   filterEvents(user);
