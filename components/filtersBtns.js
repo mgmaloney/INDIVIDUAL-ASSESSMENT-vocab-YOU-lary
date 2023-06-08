@@ -1,8 +1,8 @@
 import { getLanguages } from '../utils/databaseCalls/wordData';
 import renderToDom from '../utils/renderToDom';
 
-const filterBtnsUser = async (user) => {
-  let languages = await getLanguages(user);
+const filterBtnsUser = async () => {
+  let languages = await getLanguages();
   let domString = '';
   languages.forEach((language) => {
     domString += `
