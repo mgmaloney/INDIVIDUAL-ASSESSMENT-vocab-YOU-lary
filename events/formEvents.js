@@ -12,6 +12,27 @@ import {
 } from '../utils/databaseCalls/wordData';
 
 const formEvents = async (user) => {
+  let languageBox = document.getElementById('add-language-box');
+
+  const getLanguageBoxOrDropdownValue = () => {
+    if (languageBox.style.visibility === 'visible') {
+      console.log(languageBox.value);
+      return languageBox.value;
+    } else {
+      return document.getElementById('language-dropdown').value;
+    }
+  };
+
+  document
+    .getElementById('language-dropdown')
+    .addEventListener('change', (e) => {
+      if (e.target.value === 'add-language') {
+        languageBox.style.visibility = 'visible';
+      } else {
+        languageBox.style.visibility = 'hidden';
+      }
+    });
+
   document.getElementById('app').addEventListener('click', async (e) => {
     e.preventDefault();
     if (e.target.id.includes('submit-new-word')) {
@@ -26,16 +47,10 @@ const formEvents = async (user) => {
           word: document.getElementById('new-word').value,
           description: document.getElementById('new-word-description').value,
           private: document.getElementById('private').checked,
-          language: document.getElementById('language-dropdown').value,
+          language: `${getLanguageBoxOrDropdownValue()}`,
           timestamp: `${Date.now()}`,
           uid: `${user.uid}`,
         };
-        // if (
-        //   document.getElementById('language-dropdown').value === 'add-language'
-        // ) {
-        //   document.getElementById('add-language-box').style.visibility =
-        //     visible;
-        // }
         await createWord(payload);
         if (e.target.id === 'submit-new-word') {
           await getUserWords(user);

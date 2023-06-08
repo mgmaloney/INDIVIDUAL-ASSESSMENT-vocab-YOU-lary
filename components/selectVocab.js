@@ -3,7 +3,7 @@ import { getLanguages } from '../utils/databaseCalls/wordData';
 const selectVocab = async () => {
   let domString = `
     <select id="language-dropdown" aria-label="select language" >
-    <option value="">Choose a language</option>
+      <option value="">Choose a language</option>
 `;
   let languages = await getLanguages();
   console.log('langauges??', languages);
