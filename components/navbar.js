@@ -8,7 +8,7 @@ const navBar = (community) => {
       <ul class="nav-list">
         <li class="nav-item"><button id="home-btn" class="nav-button">Vocab-YOU-Lary</button></li>
         <li class="nav-item"><button id="community-btn" class="nav-button">Community</button></li>
-        ${community ? addWordModalCommunity() : addWordModalUser()}
+        <li class="nav-item"><div id="word-modal-user"></div><div id="word-modal-community"></div>
       </ul>
     </div>
   </nav>

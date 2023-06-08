@@ -15,6 +15,7 @@ const startApp = async (user) => {
   domBuilder();
   filterBtnsUser(user); // BUILD THE DOM
   navBar(false); //adds the navbar
+  addWordModalUser();
   logoutButton();
   domEvents(user); // starEvent(user); // ADD THE EVENT LISTENTERS TO THE DOM
   formEvents(user); // ADD FORM EVENT LISTENTERS TO THE DOM

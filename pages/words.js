@@ -90,28 +90,30 @@ const showCommunityWords = async (array) => {
       `;
       return cardBtns;
     }
-    let cardBtn = `<button id="add-entry-button">Add to my entries</button>`;
+    let cardBtn = `<button id="add-entry-btn--${word.firebaseKey}">Add to my entries</button>`;
     return cardBtn;
   };
 
   if (array.length) {
     let domString = '';
     array.forEach((word) => {
-      domString += `
-      <div class="card" style="width: 18rem">
-        <div class="card-body">
-          <h5 class="card-title card-word">${word.word}</h5>
-          <div id="card-user">
-            ${userCardInfo(word)}
+      if (!word.copied || (word.copied === true && word.editedCopy === true)) {
+        domString += `
+        <div class="card" style="width: 18rem">
+          <div class="card-body">
+            <h5 class="card-title card-word">${word.word}</h5>
+            <div id="card-user">
+              ${userCardInfo(word)}
+            </div>
+            <h6 class="card-subtitle mb-2 text-muted card-language">Language: ${
+              word.language
+            }</h6>
+            <p class="card-text description">${word.description}</p>
+            ${currentVsCommunityCardBtns(word)}
           </div>
-          <h6 class="card-subtitle mb-2 text-muted card-language">Language: ${
-            word.language
-          }</h6>
-          <p class="card-text description">${word.description}</p>
-          ${currentVsCommunityCardBtns(word)}
         </div>
-      </div>
-      `;
+        `;
+      }
     });
     renderToDom('words', domString);
   } else {

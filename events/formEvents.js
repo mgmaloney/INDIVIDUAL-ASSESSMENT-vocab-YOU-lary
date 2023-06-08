@@ -1,3 +1,7 @@
+import {
+  addWordModalCommunity,
+  addWordModalUser,
+} from '../components/addWordModal';
 import { showUserWords, showCommunityWords } from '../pages/words';
 import {
   getSingleWord,
@@ -10,6 +14,7 @@ import {
   deleteWord,
   getCommunityWords,
 } from '../utils/databaseCalls/wordData';
+import 'jquery';
 
 const formEvents = async (user) => {
   let languageBox = document.getElementById('add-language-box');
@@ -52,13 +57,14 @@ const formEvents = async (user) => {
           uid: `${user.uid}`,
         };
         await createWord(payload);
-        if (e.target.id === 'submit-new-word') {
+        if (e.target.id === 'submit-new-word-user') {
           await getUserWords(user);
+          $('#add-word-modal-user').modal('hide');
         } else {
           await getCommunityWords();
+          $('#add-word-modal-community').modal('hide');
         }
         alert('Word Submitted!');
-        document.getElementById('close-modal-btn').click();
       }
     }
     if (e.target.id.includes('update-word')) {
@@ -70,6 +76,14 @@ const formEvents = async (user) => {
       ) {
         alert('Please fill out each field');
       } else {
+        let preUpdatedWord = await getSingleWord(firebaseKey);
+        const payloadComparison = {
+          firebaseKey,
+          word: preUpdatedWord.word,
+          description: preUpdatedWord.description,
+          private: preUpdatedWord.private,
+          language: preUpdatedWord.language,
+        };
         const payload = {
           firebaseKey,
           word: document.getElementById('new-word').value,
@@ -77,14 +91,47 @@ const formEvents = async (user) => {
           private: document.getElementById('private').checked,
           language: document.getElementById('language-dropdown').value,
         };
-        await updateWord(payload);
-        if (e.target.id === 'update-word-user') {
-          await getUserWords(user);
-        } else {
-          await getCommunityWords();
+        let payloadStr = JSON.stringify(payload);
+        let payloadComparisonStr = JSON.stringify(payloadComparison);
+        if (
+          payloadComparisonStr === payloadStr &&
+          e.target.id.includes('update-word-user')
+        ) {
+          $('#add-word-modal-user').modal('hide');
+          console.log('click worked?');
+        } else if (
+          payloadComparisonStr === payloadStr &&
+          e.target.id.includes('update-word-community')
+        ) {
+          $('#add-word-modal-community').modal('hide');
+        } else if (
+          payloadComparisonStr !== payloadStr &&
+          preUpdatedWord.copied === false
+        ) {
+          await updateWord(payload);
+          alert('Word Updated!');
+          if (e.target.id.includes('update-word-user')) {
+            $('#add-word-modal-user').modal('hide');
+            await getUserWords(user);
+          } else {
+            $('#add-word-modal-community').modal('hide');
+            await getCommunityWords();
+          }
+        } else if (
+          payloadComparisonStr !== payloadStr &&
+          preUpdatedWord.copied
+        ) {
+          payload.copied = true;
+          payload.editedCopy = true;
+          await updateWord(payload);
+          if (e.target.id.includes('update-word-user')) {
+            $('#add-word-modal-user').modal('hide');
+            await getUserWords(user);
+          } else {
+            $('#add-word-modal-community').modal('hide');
+            await getCommunityWords();
+          }
         }
-        alert('Word Submitted!');
-        document.getElementById('close-modal-btn').click();
       }
     }
   });
