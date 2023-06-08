@@ -8,12 +8,15 @@ import navigationEvents from '../events/navigationEvents';
 import { addWordModalUser } from '../components/addWordModal';
 import { filterBtnsUser } from '../components/filtersBtns';
 import filterEvents from '../events/filterEvents';
+import logoutButton from '../components/logoutButton';
 
 const startApp = async (user) => {
   createUserOnSignIn();
   domBuilder();
   filterBtnsUser(user); // BUILD THE DOM
   navBar(false); //adds the navbar
+  addWordModalUser();
+  logoutButton();
   domEvents(user); // starEvent(user); // ADD THE EVENT LISTENTERS TO THE DOM
   formEvents(user); // ADD FORM EVENT LISTENTERS TO THE DOM
   filterEvents(user);

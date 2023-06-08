@@ -11,12 +11,18 @@ import {
   userFilterByLanguage,
   deleteWord,
 } from '../utils/databaseCalls/wordData';
-import { addWordModalUser } from '../components/addWordModal';
+import {
+  addWordModalCommunity,
+  addWordModalUser,
+} from '../components/addWordModal';
 import 'jquery';
+import { log } from 'util';
+import formEvents from './formEvents';
 
 const domEvents = (user) => {
   const signOutEventListener = () => {
     document.getElementById('google-auth').addEventListener('click', () => {
+      console.log('click working?');
       signOut();
       clearDom();
     });
@@ -38,15 +44,25 @@ const domEvents = (user) => {
         }
         if (e.target.id.includes('edit-user')) {
           const [, firebaseKey] = e.target.id.split('--');
-          addWordModalUser(await getSingleWord(firebaseKey));
+          const wordToEdit = await getSingleWord(firebaseKey);
+          console.log(wordToEdit);
+          addWordModalUser(wordToEdit);
           $('#add-word-modal-user').modal('show');
-          console.log('clcik worked');
         }
         if (e.target.id.includes('edit-community')) {
           const [, firebaseKey] = e.target.id.split('--');
           addWordModalCommunity(await getSingleWord(firebaseKey));
           $('#add-word-modal-community').modal('show');
-          console.log('clcik worked');
+        }
+        if (e.target.id.includes('add-entry-btn')) {
+          const [, firebaseKey] = e.target.id.split('--');
+          let word = await getSingleWord(firebaseKey);
+          console.log('word', word);
+          word.copied = true;
+          word.firebaseKey = '';
+          word.uid = user.uid;
+          console.log('word-copied', word);
+          await createWord(word);
         }
       });
   };

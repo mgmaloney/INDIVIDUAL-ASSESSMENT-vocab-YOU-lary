@@ -1,3 +1,4 @@
+import renderToDom from '../utils/renderToDom';
 import selectVocab from './selectVocab';
 
 const selectVocabStr = await selectVocab();
@@ -33,8 +34,8 @@ const addWordModalUser = (obj = {}) => {
           <div class="modal-body">
             <form data-toggle="validator" class="word-form" id=${
               obj.firebaseKey
-                ? `update-word--${obj.firebaseKey}`
-                : 'submit-word'
+                ? `update-word-form-user--${obj.firebaseKey}`
+                : 'submit-word-form-user'
             }>
               <input
                 class="form-element form-control"
@@ -88,7 +89,7 @@ const addWordModalUser = (obj = {}) => {
         </div>
       </div>
   `;
-  return domString;
+  renderToDom('word-modal-user', domString);
   // renderToDom('add-word', domString);
 };
 
@@ -127,8 +128,8 @@ const addWordModalCommunity = (obj = {}) => {
           <div class="modal-body">
             <form data-toggle="validator" class="word-form" id=${
               obj.firebaseKey
-                ? `update-word--${obj.firebaseKey}`
-                : 'submit-word'
+                ? `update-word-form-community---${obj.firebaseKey}`
+                : 'submit-word-form-community'
             }>
               <input
                 class="form-element form-control"
@@ -182,7 +183,7 @@ const addWordModalCommunity = (obj = {}) => {
         </div>
       </div>
   `;
-  return domString;
+  renderToDom('word-modal-community', domString);
 };
 
 export { addWordModalCommunity, addWordModalUser };
