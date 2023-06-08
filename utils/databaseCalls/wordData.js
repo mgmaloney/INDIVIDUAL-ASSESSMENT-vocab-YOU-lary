@@ -166,7 +166,7 @@ const getFavoriteWords = async () => {
   }
 };
 
-const getAllWords = async (user) => {
+const getAllWords = async () => {
   let communityWords = [];
   let userWords = [];
   try {
@@ -215,8 +215,8 @@ const getAllWords = async (user) => {
   return allWords;
 };
 
-const getLanguages = async (user) => {
-  let words = await getAllWords(user);
+const getLanguages = async () => {
+  let words = await getAllWords();
   let languages = ['javascript', 'css', 'html'];
   words.forEach((word) => {
     if (!languages.includes(word.language)) {

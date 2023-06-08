@@ -30,6 +30,12 @@ const formEvents = async (user) => {
           timestamp: `${Date.now()}`,
           uid: `${user.uid}`,
         };
+        // if (
+        //   document.getElementById('language-dropdown').value === 'add-language'
+        // ) {
+        //   document.getElementById('add-language-box').style.visibility =
+        //     visible;
+        // }
         await createWord(payload);
         if (e.target.id === 'submit-new-word') {
           await getUserWords(user);

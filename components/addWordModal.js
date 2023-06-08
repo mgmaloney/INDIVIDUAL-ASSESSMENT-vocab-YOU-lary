@@ -1,11 +1,8 @@
-import renderToDom from '../utils/renderToDom';
 import selectVocab from './selectVocab';
 
-const addWordModalUser = (obj = {}) => {
-  // const languageDropdownOptions = () => {
-  //   const languages = await getLanguages
-  // }
+const selectVocabStr = await selectVocab();
 
+const addWordModalUser = (obj = {}) => {
   let domString = `
   <button
     type="button"
@@ -57,7 +54,7 @@ const addWordModalUser = (obj = {}) => {
                 value="${obj.description || ''}"
                 required
               >
-              ${selectVocab()}
+              ${selectVocabStr}
               <div class="form-check">
                 <input type="checkbox"  id="private" ${
                   obj.private ? 'checked' : ''
@@ -151,7 +148,7 @@ const addWordModalCommunity = (obj = {}) => {
                 value="${obj.description || ''}"
                 required
               >
-              ${selectVocab()}
+              ${selectVocabStr}
               <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="private" ${
                   obj.private ? 'checked' : ''
