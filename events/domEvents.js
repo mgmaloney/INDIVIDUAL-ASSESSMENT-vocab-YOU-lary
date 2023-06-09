@@ -63,6 +63,7 @@ const domEvents = (user) => {
           word.uid = user.uid;
           console.log('word-copied', word);
           await createWord(word);
+          alert('Added to your entries!');
         }
       });
   };
