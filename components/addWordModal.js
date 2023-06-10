@@ -35,7 +35,7 @@ const addWordModalUser = (obj = {}) => {
           <div class="modal-body">
             <form data-toggle="validator" class="word-form" id=${
               obj.firebaseKey
-                ? `update-word-form-user--${obj.firebaseKey}`
+                ? `update-form-user--${obj.firebaseKey}`
                 : 'submit-word-form-user'
             }>
               <input
@@ -130,7 +130,7 @@ const addWordModalCommunity = (obj = {}) => {
           <div class="modal-body">
             <form data-toggle="validator" class="word-form" id=${
               obj.firebaseKey
-                ? `update-word-form-community---${obj.firebaseKey}`
+                ? `update-form-community---${obj.firebaseKey}`
                 : 'submit-word-form-community'
             }>
               <input
