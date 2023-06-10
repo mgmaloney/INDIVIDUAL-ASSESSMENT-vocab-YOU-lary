@@ -4,6 +4,7 @@ import {
 } from '../components/addWordModal';
 import { filterBtnsCommunity, filterBtnsUser } from '../components/filtersBtns';
 import navBar from '../components/navbar';
+import { searchBoxCommunity, searchBoxUser } from '../components/searchBox';
 import {
   sortDropDownCommunity,
   sortDropDownUser,
@@ -12,6 +13,7 @@ import {
   getCommunityWords,
   getUserWords,
 } from '../utils/databaseCalls/wordData';
+import searchEvents from './searchEvents';
 import sortEvents from './sortEvents';
 
 const navigationEvents = async (user) => {
@@ -20,6 +22,8 @@ const navigationEvents = async (user) => {
       await getCommunityWords();
       sortDropDownCommunity();
       sortEvents(user);
+      searchBoxCommunity();
+      searchEvents(user);
       navBar(true);
       addWordModalCommunity();
       await filterBtnsCommunity();
@@ -28,6 +32,8 @@ const navigationEvents = async (user) => {
       await getUserWords(user);
       sortDropDownUser();
       sortEvents(user);
+      searchBoxUser();
+      searchEvents(user);
       navBar(false);
       addWordModalUser();
       await filterBtnsUser();

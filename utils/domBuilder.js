@@ -7,7 +7,7 @@ const domBuilder = async (community) => {
   <div id="nav-login">
     <div id="navigation"></div>
     <div id="search-login">
-      <div id="searchbox"><input id="searchbox-input" type="text"></input><button id="search-btn">Search</button></div>
+      <div id="searchbox"></div>
       <div id="login-form-container"></div>
     </div>
   </div>

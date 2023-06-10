@@ -11,6 +11,8 @@ import filterEvents from '../events/filterEvents';
 import logoutButton from '../components/logoutButton';
 import { sortDropDownUser } from '../components/sortComponent';
 import sortEvents from '../events/sortEvents';
+import searchEvents from '../events/searchEvents';
+import { searchBoxUser } from '../components/searchBox';
 
 const startApp = async (user) => {
   createUserOnSignIn();
@@ -20,6 +22,8 @@ const startApp = async (user) => {
   navBar(false); //adds the navbar
   addWordModalUser();
   logoutButton();
+  searchBoxUser();
+  searchEvents(user);
   domEvents(user); // starEvent(user); // ADD THE EVENT LISTENTERS TO THE DOM
   formEvents(user); // ADD FORM EVENT LISTENTERS TO THE DOM
   filterEvents(user);
