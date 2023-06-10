@@ -1,3 +1,4 @@
+import { filterBtnsCommunity, filterBtnsUser } from '../components/filtersBtns';
 import { showCommunityWords, showUserWords } from '../pages/words';
 import {
   returnCommunityWords,

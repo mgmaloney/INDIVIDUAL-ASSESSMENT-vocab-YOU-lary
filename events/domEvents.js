@@ -45,7 +45,6 @@ const domEvents = (user) => {
         if (e.target.id.includes('edit-user')) {
           const [, firebaseKey] = e.target.id.split('--');
           const wordToEdit = await getSingleWord(firebaseKey);
-          console.log(wordToEdit);
           addWordModalUser(wordToEdit);
           $('#add-word-modal-user').modal('show');
         }

@@ -49,8 +49,8 @@ const formEvents = async (user) => {
     });
 
   document.getElementById('app').addEventListener('click', async (e) => {
-    e.preventDefault();
     if (e.target.id.includes('submit-new-word')) {
+      e.preventDefault();
       if (
         document.getElementById('new-word').value === '' ||
         document.getElementById('new-word-description').value === '' ||
@@ -78,6 +78,7 @@ const formEvents = async (user) => {
       }
     }
     if (e.target.id.includes('update-word')) {
+      e.preventDefault();
       const [, firebaseKey] = e.target.id.split('--');
       if (
         document.getElementById('new-word').value === '' ||
@@ -115,11 +116,11 @@ const formEvents = async (user) => {
           modalHideAndReset();
         } else if (
           payloadComparisonStr !== payloadStr &&
-          preUpdatedWord.copied === false
+          preUpdatedWord.copied !== true
         ) {
+          console.log('this working?');
           await updateWord(payload);
           alert('Word Updated!');
-
           if (e.target.id.includes('update-word-user')) {
             modalHideAndReset();
             await getUserWords(user);
@@ -134,7 +135,7 @@ const formEvents = async (user) => {
           payload.copied = true;
           payload.editedCopy = true;
           await updateWord(payload);
-
+          alert('Word Updated!');
           if (e.target.id.includes('update-word-user')) {
             modalHideAndReset();
             await getUserWords(user);
