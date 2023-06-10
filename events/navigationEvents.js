@@ -23,6 +23,7 @@ const navigationEvents = (user) => {
       addWordModalUser();
       await filterBtnsUser();
     }
+    // if(e.target.id === '')
   });
 };
 
