@@ -11,7 +11,7 @@ import filterEvents from '../events/filterEvents';
 import logoutButton from '../components/logoutButton';
 import { sortDropDownUser } from '../components/sortComponent';
 import sortEvents from '../events/sortEvents';
-import searchEvents from '../events/searchEvents';
+import { searchEvents } from '../events/searchEvents';
 import { searchBoxUser } from '../components/searchBox';
 
 const startApp = async (user) => {

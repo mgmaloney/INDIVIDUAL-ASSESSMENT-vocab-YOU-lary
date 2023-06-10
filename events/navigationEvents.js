@@ -13,7 +13,7 @@ import {
   getCommunityWords,
   getUserWords,
 } from '../utils/databaseCalls/wordData';
-import searchEvents from './searchEvents';
+import { searchEvents } from './searchEvents';
 import sortEvents from './sortEvents';
 
 const navigationEvents = async (user) => {
@@ -38,10 +38,6 @@ const navigationEvents = async (user) => {
       addWordModalUser();
       await filterBtnsUser();
     }
-    // if (e.target.id === 'search-btn') {
-    //   let searchValue = document.getElementById('searchbox-input').value;
-    //   let words =
-    // }
   });
 };
 

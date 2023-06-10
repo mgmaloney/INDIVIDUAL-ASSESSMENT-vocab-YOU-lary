@@ -4,6 +4,8 @@ import {
   returnUserWords,
 } from '../utils/databaseCalls/wordData';
 
+let searchResultsForSort = [];
+
 const searchEvents = (user) => {
   document.getElementById('searchbox').addEventListener('click', async (e) => {
     if (e.target.id.includes('search-btn-user')) {
@@ -20,6 +22,7 @@ const searchEvents = (user) => {
         }
       });
       showUserWords(searchResults);
+      searchResultsForSort = searchResults;
     }
     if (e.target.id.includes('search-btn-community')) {
       let searchTerm = document.getElementById(
@@ -37,8 +40,9 @@ const searchEvents = (user) => {
         }
       });
       showCommunityWords(searchResults);
+      searchResultsForSort = searchResults;
     }
   });
 };
 
-export default searchEvents;
+export { searchEvents, searchResultsForSort };
