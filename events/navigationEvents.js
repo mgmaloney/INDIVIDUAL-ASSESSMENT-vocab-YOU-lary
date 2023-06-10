@@ -5,25 +5,37 @@ import {
 import { filterBtnsCommunity, filterBtnsUser } from '../components/filtersBtns';
 import navBar from '../components/navbar';
 import {
+  sortDropDownCommunity,
+  sortDropDownUser,
+} from '../components/sortComponent';
+import {
   getCommunityWords,
   getUserWords,
 } from '../utils/databaseCalls/wordData';
+import sortEvents from './sortEvents';
 
-const navigationEvents = (user) => {
+const navigationEvents = async (user) => {
   document.getElementById('navigation').addEventListener('click', async (e) => {
     if (e.target.id === 'community-btn') {
       await getCommunityWords();
+      sortDropDownCommunity();
+      sortEvents(user);
       navBar(true);
       addWordModalCommunity();
       await filterBtnsCommunity();
     }
     if (e.target.id.includes('home-btn')) {
       await getUserWords(user);
+      sortDropDownUser();
+      sortEvents(user);
       navBar(false);
       addWordModalUser();
       await filterBtnsUser();
     }
-    // if(e.target.id === '')
+    // if (e.target.id === 'search-btn') {
+    //   let searchValue = document.getElementById('searchbox-input').value;
+    //   let words =
+    // }
   });
 };
 
