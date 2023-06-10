@@ -16,6 +16,17 @@ import {
 } from '../utils/databaseCalls/wordData';
 import 'jquery';
 
+const modalHideAndReset = () => {
+  $('#add-word-modal-user').modal('hide');
+  $('#add-word-modal-user').on('hidden.bs.modal', function () {
+    $(this).find('form').trigger('reset');
+  });
+  $('#add-word-modal-community').modal('hide');
+  $('#add-word-modal-community').on('hidden.bs.modal', function () {
+    $(this).find('form').trigger('reset');
+  });
+};
+
 const formEvents = async (user) => {
   let languageBox = document.getElementById('add-language-box');
 
@@ -27,7 +38,6 @@ const formEvents = async (user) => {
       return document.getElementById('language-dropdown').value;
     }
   };
-
   document
     .getElementById('language-dropdown')
     .addEventListener('change', (e) => {
@@ -58,11 +68,11 @@ const formEvents = async (user) => {
         };
         await createWord(payload);
         if (e.target.id === 'submit-new-word-user') {
+          modalHideAndReset();
           await getUserWords(user);
-          $('#add-word-modal-user').modal('hide');
         } else {
+          modalHideAndReset();
           await getCommunityWords();
-          $('#add-word-modal-community').modal('hide');
         }
         alert('Word Submitted!');
       }
@@ -97,24 +107,24 @@ const formEvents = async (user) => {
           payloadComparisonStr === payloadStr &&
           e.target.id.includes('update-word-user')
         ) {
-          $('#add-word-modal-user').modal('hide');
-          console.log('click worked?');
+          modalHideAndReset();
         } else if (
           payloadComparisonStr === payloadStr &&
           e.target.id.includes('update-word-community')
         ) {
-          $('#add-word-modal-community').modal('hide');
+          modalHideAndReset();
         } else if (
           payloadComparisonStr !== payloadStr &&
           preUpdatedWord.copied === false
         ) {
           await updateWord(payload);
           alert('Word Updated!');
+
           if (e.target.id.includes('update-word-user')) {
-            $('#add-word-modal-user').modal('hide');
+            modalHideAndReset();
             await getUserWords(user);
           } else {
-            $('#add-word-modal-community').modal('hide');
+            modalHideAndReset();
             await getCommunityWords();
           }
         } else if (
@@ -124,11 +134,12 @@ const formEvents = async (user) => {
           payload.copied = true;
           payload.editedCopy = true;
           await updateWord(payload);
+
           if (e.target.id.includes('update-word-user')) {
-            $('#add-word-modal-user').modal('hide');
+            modalHideAndReset();
             await getUserWords(user);
           } else {
-            $('#add-word-modal-community').modal('hide');
+            modalHideAndReset();
             await getCommunityWords();
           }
         }

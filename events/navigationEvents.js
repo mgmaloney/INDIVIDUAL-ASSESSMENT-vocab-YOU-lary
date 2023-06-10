@@ -1,3 +1,7 @@
+import {
+  addWordModalCommunity,
+  addWordModalUser,
+} from '../components/addWordModal';
 import { filterBtnsCommunity, filterBtnsUser } from '../components/filtersBtns';
 import navBar from '../components/navbar';
 import {
@@ -10,11 +14,13 @@ const navigationEvents = (user) => {
     if (e.target.id === 'community-btn') {
       await getCommunityWords();
       navBar(true);
+      addWordModalCommunity();
       await filterBtnsCommunity();
     }
     if (e.target.id.includes('home-btn')) {
       await getUserWords(user);
       navBar(false);
+      addWordModalUser();
       await filterBtnsUser();
     }
   });

@@ -7,7 +7,7 @@ const addWordModalUser = (obj = {}) => {
   let domString = `
   <button
     type="button"
-    class="btn btn-primary modal-button"
+    class="modal-button"
     data-bs-toggle="modal"
     data-bs-target="#add-word-modal-user"
   >
@@ -25,6 +25,7 @@ const addWordModalUser = (obj = {}) => {
           <div class="modal-header">
             <h5 class="modal-title" id="add-word-modal-title">Add a Word!</h5>
             <button
+              id="close-modal-btn-user"
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
@@ -101,7 +102,7 @@ const addWordModalCommunity = (obj = {}) => {
   let domString = `
   <button
     type="button"
-    class="btn btn-primary modal-button"
+    class="modal-button"
     data-bs-toggle="modal"
     data-bs-target="#add-word-modal-community"
   >
@@ -119,6 +120,7 @@ const addWordModalCommunity = (obj = {}) => {
           <div class="modal-header">
             <h5 class="modal-title" id="add-word-modal-title">Add a Word!</h5>
             <button
+              id="close-modal-btn-community"
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
@@ -172,7 +174,7 @@ const addWordModalCommunity = (obj = {}) => {
           </div>
           <div class="modal-footer">
             <button
-              id="close-modal-btn"
+              id="close-modal-btn-community"
               type="button"
               class="btn btn-primary"
               data-bs-dismiss="modal"

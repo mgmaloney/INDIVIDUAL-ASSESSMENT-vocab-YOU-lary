@@ -1,6 +1,6 @@
 import { getLanguages } from '../utils/databaseCalls/wordData';
 
-const selectVocab = async () => {
+const selectVocab = async (objLanguage) => {
   let domString = `
     <select id="language-dropdown" aria-label="select language" >
       <option value="">Choose a language</option>
@@ -9,7 +9,9 @@ const selectVocab = async () => {
   console.log('langauges??', languages);
   languages.forEach((language) => {
     domString += `
-    <option value="${language}">${language}</option>
+    <option value="${language}">${language} ${
+      objLanguage === language ? 'selected' : ''
+    }</option>
     `;
   });
 

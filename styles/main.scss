@@ -1,10 +1,95 @@
-@import "~@fortawesome/fontawesome-free/css/all.min.css";
-@import "~bootstrap/scss/bootstrap";
-
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
+@import '~bootstrap/scss/bootstrap';
 
 body {
-  background-color: antiquewhite;
+  font-family: 'Open Sans';
+  background-color: black;
   color: brown;
   text-align: center;
   margin-top: 100px;
+}
+
+button {
+  background-color: rgb(31, 178, 227);
+  color: white;
+  border: solid 0px transparent;
+  border-radius: 5%;
+}
+ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+}
+
+#nav-login {
+  display: flex;
+  justify-content: space-between;
+}
+
+#navigation {
+  display: flex;
+  align-items: center;
+}
+
+#navigation button {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  font-size: 2rem;
+}
+
+#search-login {
+  display: flex;
+  align-items: center;
+}
+
+#filter-language-btns {
+  display: flex;
+  justify-content: center;
+  margin: 0.25rem;
+}
+
+#filter-language-btns * {
+  margin: 0.5rem;
+  font-size: x-large;
+}
+
+#searchbox {
+  display: flex;
+  justify-content: center;
+}
+
+#searchbox * {
+  margin: 0.5rem;
+}
+
+#searchbox button {
+  font-size: large;
+}
+
+#searchbox input {
+  height: 2rem;
+}
+
+#words {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  margin: 0.5rem;
+}
+
+.cardUserInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardUserInfo * {
+  margin: 0.5rem;
+}
+
+.card img {
+  height: 35px;
 }

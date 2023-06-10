@@ -17,6 +17,21 @@ const getSingleUser = async (firebaseKey) => {
   }
 };
 
+const getUsers = async () => {
+  try {
+    const response = await fetch(`${endpoint}/users.json`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    let responseObj = response.json();
+    return Object.values(responseObj);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 const updateUser = async (payload) => {
   try {
     const response = await fetch(
@@ -66,4 +81,4 @@ const createUserOnSignIn = async () => {
 
 // const addFavoriteWord = () =>
 
-export { getSingleUser, createUserOnSignIn };
+export { getSingleUser, createUserOnSignIn, getUsers };
