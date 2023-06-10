@@ -12,7 +12,10 @@ const domBuilder = async (community) => {
     </div>
   </div>
   <div id="main-container">
-    <div id="filter-language-btns"></div>
+    <div id="sort-filter">
+      <div id="sort-div"></div>
+      <div id="filter-language-btns"></div>
+    </div>
     <div id="sort"></div>
     <div id="words"></div>
     <div id="add-word"></div>

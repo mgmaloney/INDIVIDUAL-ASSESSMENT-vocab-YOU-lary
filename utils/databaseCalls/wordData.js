@@ -32,6 +32,52 @@ const getUserWords = async (user) => {
   }
 };
 
+const returnUserWords = async (user) => {
+  try {
+    const response = await fetch(
+      `${endpoint}/words.json?orderBy="uid"&equalTo="${user.uid}"`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    let wordsObj = await response.json();
+    let words = Object.values(wordsObj);
+    if (words) {
+      return words;
+    } else {
+      return [];
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const returnCommunityWords = async () => {
+  try {
+    const response = await fetch(
+      `${endpoint}/words.json?orderBy="private"&equalTo=false`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    let wordsObj = await response.json();
+    let words = Object.values(wordsObj);
+    if (words) {
+      return words;
+    } else {
+      return [];
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 const getSingleWord = async (firebaseKey) => {
   try {
     const response = await fetch(`${endpoint}/words/${firebaseKey}.json`, {
@@ -246,4 +292,6 @@ export {
   userFilterByLanguage,
   deleteWord,
   getLanguages,
+  returnCommunityWords,
+  returnUserWords,
 };
