@@ -3,10 +3,15 @@
 
 body {
   font-family: 'Open Sans';
-  background-color: black;
-  color: brown;
+  background: linear-gradient(90deg, #5d36bf 0%, #e5b7f1 100%);
+  color: rgb(31, 178, 227);
   text-align: center;
   margin-top: 100px;
+}
+
+#page-title {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 5rem;
 }
 
 button {
@@ -24,6 +29,7 @@ ul {
 #nav-login {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 #navigation {
@@ -50,6 +56,7 @@ ul {
 
 #filter-language-btns * {
   margin: 0.5rem;
+  width: 8rem;
   font-size: x-large;
 }
 
