@@ -3,8 +3,9 @@ import {
   returnCommunityWords,
   returnUserWords,
 } from '../utils/databaseCalls/wordData';
+import { searchResultsForSort } from './searchEvents';
 
-const sortEvents= (user) => {
+const sortEvents = (user) => {
   const sortNameAtoZ = (e, wordsArr) => {
     wordsArr.sort((a, b) => {
       const nameA = a.word.toUpperCase();
@@ -55,7 +56,7 @@ const sortEvents= (user) => {
       }
       return 0;
     });
-    if (e.target.id.includes('sort-name-user')) {
+    if (e.target.id.includes('sort-language-user')) {
       showUserWords(wordsArr);
     } else {
       showCommunityWords(wordsArr);
@@ -74,7 +75,7 @@ const sortEvents= (user) => {
       }
       return 0;
     });
-    if (e.target.id.includes('sort-name-user')) {
+    if (e.target.id.includes('sort-language-user')) {
       showUserWords(wordsArr);
     } else {
       showCommunityWords(wordsArr);
@@ -85,7 +86,12 @@ const sortEvents= (user) => {
     .getElementById('sort-select')
     .addEventListener('change', async (e) => {
       if (e.target.value.includes('user')) {
-        let words = await returnUserWords(user);
+        let words = [];
+        if (document.getElementById('searchbox-input-user').value === '') {
+          words = await returnUserWords(user);
+        } else {
+          words = searchResultsForSort;
+        }
         if (e.target.value === 'sort-name-user-AtoZ') {
           sortNameAtoZ(e, words);
         }
@@ -100,7 +106,12 @@ const sortEvents= (user) => {
         }
       }
       if (e.target.value.includes('community')) {
-        let words = await returnCommunityWords();
+        let words = [];
+        if (document.getElementById('searchbox-input-community').value === '') {
+          words = await returnUserWords(user);
+        } else {
+          words = searchResultsForSort;
+        }
         if (e.target.value === 'sort-name-community-AtoZ') {
           sortNameAtoZ(e, words);
         }
@@ -115,18 +126,6 @@ const sortEvents= (user) => {
         }
       }
     });
-  // document
-  //   .getElementById('sort-select-user')
-  //   .addEventListener('change', (e) => {
-  //     if (e.target.value === 'sort-name-community-AtoZ') {
-  //     }
-  //     if (e.target.value === 'sort-name-community-ZtoA') {
-  //     }
-  //     if (e.target.value === 'sort-language-community-AtoZ') {
-  //     }
-  //     if (e.target.value === 'sort-language-community-ZtoA') {
-  //     }
-  //   });
 };
 
 export default sortEvents;
