@@ -7,7 +7,7 @@ const addWordModalUser = (obj = {}) => {
   let domString = `
   <button
     type="button"
-    class="btn btn-primary modal-button"
+    class="modal-button"
     data-bs-toggle="modal"
     data-bs-target="#add-word-modal-user"
   >
@@ -102,7 +102,7 @@ const addWordModalCommunity = (obj = {}) => {
   let domString = `
   <button
     type="button"
-    class="btn btn-primary modal-button"
+    class="modal-button"
     data-bs-toggle="modal"
     data-bs-target="#add-word-modal-community"
   >

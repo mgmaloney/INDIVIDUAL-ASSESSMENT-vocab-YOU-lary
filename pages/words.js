@@ -1,6 +1,9 @@
 import firebase from 'firebase';
 import renderToDom from '../utils/renderToDom';
 import clearDom from '../utils/clearDom';
+import { getSingleUser, getUsers } from '../utils/databaseCalls/userData';
+
+const users = getUsers();
 
 const showUserWords = async (array) => {
   clearDom();
@@ -17,16 +20,19 @@ const showUserWords = async (array) => {
   const userCardInfo = (word) => {
     if (word.uid === `${firebase.auth().currentUser.uid}`) {
       let cardUserInfo = `
-      <img src="${firebase.auth().currentUser.photoURL}">
-      <h6 class="card-subtitle mb-2 text-muted card-username">Created by You!</h6>
+      <div class="cardUserInfo">
+        <img src="${firebase.auth().currentUser.photoURL}">
+        <h6 class="card-subtitle mb-2 text-muted card-username">Created by You!</h6>
+      </div>
       `;
       return cardUserInfo;
+    } else {
+      let cardUserInfo = `
+        <img src="${getSingleUser(word.uid).photoURL}">
+        <h6 class="card-subtitle mb-2 text-muted card-username">Created by You!</h6>
+        `;
+      return cardUserInfo;
     }
-    let cardUserInfo = `
-    <img src="${firebase.auth().currentUser.photoURL}">
-    <h6 class="card-subtitle mb-2 text-muted card-username">Created by You!</h6>
-    `;
-    return cardUserInfo;
   };
 
   if (array.length) {
@@ -42,9 +48,13 @@ const showUserWords = async (array) => {
           <h6 class="card-subtitle mb-2 text-muted card-language">Language: ${
             word.language
           }</h6>
-          <p class="card-text description">${word.description}</p>
-            <button id="edit-user--${word.firebaseKey}">Edit</button>
-            <button id="delete-user--${word.firebaseKey}">Delete</button>
+          <p class="card-text description">Definition: ${word.description}</p>
+            <button class="card-btn" id="edit-user--${
+              word.firebaseKey
+            }">Edit</button>
+            <button class="card-btn" id="delete-user--${
+              word.firebaseKey
+            }">Delete</button>
         </div>
       </div>
       `;
@@ -70,14 +80,18 @@ const showCommunityWords = async (array) => {
   const userCardInfo = (word) => {
     if (word.uid === `${firebase.auth().currentUser.uid}`) {
       let cardUserInfo = `
+      <div class="cardUserInfo>
       <img class="profile-pic" src="${firebase.auth().currentUser.photoURL}">
       <h6 class="card-subtitle mb-2 text-muted card-username">Created by You!</h6>
+      </div>
       `;
       return cardUserInfo;
     }
     let cardUserInfo = `
+    <div class="cardUserInfo>
     <img class="profile-pic" src="${firebase.auth().currentUser.photoURL}">
     <h6 class="card-subtitle mb-2 text-muted card-username">Created by You!</h6>
+    </div>
     `;
     return cardUserInfo;
   };
@@ -85,8 +99,8 @@ const showCommunityWords = async (array) => {
   const currentVsCommunityCardBtns = (word) => {
     if (word.uid === `${firebase.auth().currentUser.uid}`) {
       let cardBtns = `
-        <button id="edit-community--${word.firebaseKey}">Edit</button>
-        <button id="delete-community--${word.firebaseKey}">Delete</button>
+        <button class="card-btn" id="edit-community--${word.firebaseKey}">Edit</button>
+        <button class="card-btn" id="delete-community--${word.firebaseKey}">Delete</button>
       `;
       return cardBtns;
     }
@@ -108,7 +122,7 @@ const showCommunityWords = async (array) => {
             <h6 class="card-subtitle mb-2 text-muted card-language">Language: ${
               word.language
             }</h6>
-            <p class="card-text description">${word.description}</p>
+            <p class="card-text description">Definition: ${word.description}</p>
             ${currentVsCommunityCardBtns(word)}
           </div>
         </div>
