@@ -1,6 +1,10 @@
 import { showCommunityWords, showUserWords } from '../../pages/words';
 import firebase from 'firebase';
 import client from '../client';
+import {
+  filterBtnsCommunity,
+  filterBtnsUser,
+} from '../../components/filtersBtns';
 
 const endpoint = client.databaseURL;
 
@@ -125,14 +129,14 @@ const userFilterByLanguage = async (user, language) => {
     console.log(e);
   }
   const languageWords = words.filter((word) => word.language === `${language}`);
-  console.log(languageWords);
-  showUserWords(languageWords);
+  await showUserWords(languageWords);
+  filterBtnsUser();
 };
 
-const publicFilterByLanguage = async (language) => {
+const publicFilterByLanguage = async (filterLanguage) => {
   let words = [];
   try {
-    const response = fetch(
+    const response = await fetch(
       `${endpoint}/words.json?orderBy="private"&equalTo=false`,
       {
         method: 'GET',
@@ -141,13 +145,18 @@ const publicFilterByLanguage = async (language) => {
         },
       }
     );
-    let wordsObj = await response.json();
+    const wordsObj = await response.json();
     words = Object.values(wordsObj);
+    console.log('words', words);
   } catch (e) {
     console.log(e);
   }
-  const languageWords = words.filter((word) => word.language === `${language}`);
-  console.log(languageWords);
+  const languageWords = words.filter(
+    (word) => word.language === `${filterLanguage}`
+  );
+  console.log('languageword', languageWords);
+  await showCommunityWords(languageWords);
+  filterBtnsCommunity();
 };
 
 const getFavoriteWords = async () => {

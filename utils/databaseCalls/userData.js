@@ -25,7 +25,7 @@ const getUsers = async () => {
         'Content-Type': 'application/json',
       },
     });
-    let responseObj = response.json();
+    let responseObj = await response.json();
     return Object.values(responseObj);
   } catch (e) {
     console.log(e);

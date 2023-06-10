@@ -11,7 +11,8 @@ const filterEvents = (user) => {
     }
     if (e.target.id.includes('filter-btn-community')) {
       const [language] = e.target.id.split('--');
-      publicFilterByLanguage(user, language);
+      console.log('community language', language);
+      publicFilterByLanguage(language);
     }
   });
 };
