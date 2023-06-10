@@ -3,7 +3,16 @@ import renderToDom from '../utils/renderToDom';
 import clearDom from '../utils/clearDom';
 import { getSingleUser, getUsers } from '../utils/databaseCalls/userData';
 
-const users = getUsers();
+let users = await getUsers();
+
+console.log('users', users);
+
+const findSpecificUserForCard = (word) => {
+  console.log('word', word);
+  let user = users.find((element) => element.uid === word.uid);
+  console.log('user', user);
+  return user;
+};
 
 const showUserWords = async (array) => {
   clearDom();
@@ -27,9 +36,12 @@ const showUserWords = async (array) => {
       `;
       return cardUserInfo;
     } else {
+      let user = findSpecificUserForCard(word);
       let cardUserInfo = `
-        <img src="${getSingleUser(word.uid).photoURL}">
-        <h6 class="card-subtitle mb-2 text-muted card-username">Created by You!</h6>
+      <div class="cardUserInfo"
+        <img src="${user.photoUrl}">
+        <h6 class="card-subtitle mb-2 text-muted card-username">Created by ${user.displayName}</h6>
+      </div
         `;
       return cardUserInfo;
     }
@@ -39,7 +51,7 @@ const showUserWords = async (array) => {
     let domString = '';
     array.forEach((word) => {
       domString += `
-      <div class="card" style="width: 18rem;">
+      <div class="card" style="width: 18rem">
         <div class="card-body">
           <h5 class="card-title card-word">${word.word}</h5>
           <div id="card-user">
@@ -80,20 +92,23 @@ const showCommunityWords = async (array) => {
   const userCardInfo = (word) => {
     if (word.uid === `${firebase.auth().currentUser.uid}`) {
       let cardUserInfo = `
-      <div class="cardUserInfo>
-      <img class="profile-pic" src="${firebase.auth().currentUser.photoURL}">
+      <div class="cardUserInfo">
+      <img src="${firebase.auth().currentUser.photoURL}">
       <h6 class="card-subtitle mb-2 text-muted card-username">Created by You!</h6>
       </div>
       `;
       return cardUserInfo;
-    }
-    let cardUserInfo = `
-    <div class="cardUserInfo>
-    <img class="profile-pic" src="${firebase.auth().currentUser.photoURL}">
-    <h6 class="card-subtitle mb-2 text-muted card-username">Created by You!</h6>
+    } else {
+      let user = findSpecificUserForCard(word);
+      console.log(user);
+      let cardUserInfo = `
+    <div class="cardUserInfo">
+    <img src='${user.photoUrl}'>
+    <h6 class="card-subtitle mb-2 text-muted card-username">Created by ${user.displayName}</h6>
     </div>
     `;
-    return cardUserInfo;
+      return cardUserInfo;
+    }
   };
 
   const currentVsCommunityCardBtns = (word) => {
